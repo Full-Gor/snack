@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Promotions - Burger Délice</title>
+    <style>
+        /* Styles généraux */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f8f8f8;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Styles de l'en-tête */
+        header {
+            background-color: #d62828;
+            color: white;
+            padding: 20px 0;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 32px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo span {
+            margin-left: 10px;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 30px;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: #ffdd00;
+        }
+        
+        /* Styles du titre de page */
+        .page-title {
+            background-color: #003049;
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+        }
+        
+        .page-title h1 {
+            font-size: 42px;
+            margin-bottom: 15px;
+        }
+        
+        .page-title p {
+            font-size: 18px;
+            max-width: 800px;
+            margin: 0 auto;
+            color: #eee;
+        }
+        
+        /* Styles des promotions */
+        .promotions-section {
+            padding: 80px 0;
+        }
+        
+        .promotions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+        }
+        
+        .promo-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        
+        .promo-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .promo-image {
+            height: 200px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .promo-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .promo-card:hover .promo-image img {
+            transform: scale(1.1);
+        }
+        
+        .promo-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: #fcbf49;
+            color: #333;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+        }
+        
+        .promo-content {
+            padding: 25px;
+        }
+        
+        .promo-content h2 {
+            font-size: 24px;
+            color: #d62828;
+            margin-bottom: 10px;
+        }
+        
+        .promo-content p {
+            color: #666;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+        
+        .promo-duration {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            color: #003049;
+            font-weight: bold;
+        }
+        
+        .promo-duration svg {
+            margin-right: 10px;
+        }
+        
+        .promo-price {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .old-price {
+            text-decoration: line-through;
+            color: #999;
+            margin-right: 15px;
+            font-size: 18px;
+        }
+        
+        .new-price {
+            color: #d62828;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        
+        .promo-button {
+            display: inline-block;
+            padding: 12px 25px;
+            background-color: #fcbf49;
+            color: #333;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        
+        .promo-button:hover {
+            background-color: #ffdd00;
+        }
+        
+        /* Styles de la section spéciale */
+        .special-promo {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('/api/placeholder/1200/400') center/cover;
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+            margin: 50px 0;
+        }
+        
+        .special-promo h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+        
+        .special-promo p {
+            font-size: 18px;
+            max-width: 700px;
+            margin: 0 auto 30px;
+            line-height: 1.6;
+        }
+        
+        .countdown {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+        
+        .countdown-item {
+            width: 80px;
+            height: 80px;
+            background-color: rgba(255, 255, 255, 0.1);
+            margin: 0 10px;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .countdown-number {
+            font-size: 32px;
+            font-weight: bold;
+            color: #fcbf49;
+        }
+        
+        .countdown-label {
+            font-size: 14px;
+            color: #ddd;
+        }
+        
+        .special-button {
+            display: inline-block;
+            padding: 15px 30px;
+            background-color: #d62828;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        
+        .special-button:hover {
+            background-color: #b51d1d;
+        }
+        
+        /* Styles du pied de page */
+        footer {
+            background-color: #333;
+            color: white;
+            padding: 50px 0 20px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-column h3 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            color: #fcbf49;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-column a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-column a:hover {
+            color: #fcbf49;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            transition: all 0.3s;
+        }
+        
+        .social-links a:hover {
+            background-color: #fcbf49;
+            color: #333;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 14px;
+            color: #aaa;
+        }
+        
+        /* Media queries pour la responsivité */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .page-title h1 {
+                font-size: 32px;
+            }
+            
+            .page-title p {
+                font-size: 16px;
+            }
+            
+            .promotions-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .countdown-item {
+                width: 60px;
+                height: 60px;
+            }
+            
+            .countdown-number {
+                font-size: 24px;
+            }
+            
+            .countdown-label {
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- En-tête -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">
+                    🍔 <span>Burger Délice</span>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="#" class="active">Promotions</a></li>
+                    <li><a href="temoignages.html">Témoignages</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Titre de page -->
+    <div class="page-title">
+        <div class="container">
+            <h1>Nos Promotions Exceptionnelles</h1>
+            <p>Découvrez nos offres spéciales et économisez sur vos repas préférés</p>
+        </div>
+    </div>
+
+    <!-- Section des promotions -->
+    <section class="promotions-section">
+        <div class="container">
+            <div class="promotions-grid">
+                <div class="promo-card">
+                    <div class="promo-image">
+                        <img src="/api/placeholder/400/200" alt="Menu Famille">
+                        <div class="promo-badge">-20%</div>
+                    </div>
+                    <div class="promo-content">
+                        <h2>Menu Famille XL</h2>
+                        <p>Idéal pour les repas en famille ! 4 burgers au choix, 4 portions de frites, 4 boissons et 2 desserts pour un prix imbattable.</p>
+                        <div class="promo-duration">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12 2C6.5 2 2 6.5 2 12C2 17.5 6.5 22 12 22C17.5 22 22 17.5 22 12C22 6.5 17.5 2 12 2ZM12 20C7.59 20 4 16.41 4 12C4 7.59 7.59 4 12 4C16.41 4 20 7.59 20 12C20 16.41 16.41 20 12 20ZM12.5 7H11V13L16.2 16.2L17 14.9L12.5 12.2V7Z" fill="currentColor"/>
+                            </svg>
+                            Offre valable tous les jours
+                        </div>
+                        <div class="promo-price">
+                            <div class="old-price">49,90 €</div>
+                            <div class="new-price">39,90 €</div>
+                        </div>
+                        <a href="#" class="promo-button">En profiter</a>
+                    </div>
+                </div>
+                
+                <div class="promo-card">
+                    <div class="promo-image">
+                        <img src="/api/placeholder/400/200" alt="Menu Étudiant">
+                        <div class="promo-badge">BON PLAN</div>
+                    </div>
+                    <div class="promo-content">
+                        <h2>Menu Étudiant</h2>
+                        <p>Sur présentation de votre carte étudiante, profitez d'un burger classique, une portion de frites et une boisson à petit prix.</p>
+                        <div class="promo-duration">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12 2C6.5 2 2 6.5 2 12C2 17.5 6.5 22 12 22C17.5 22 22 17.5 22 12C22 6.5 17.5 2 12 2ZM12 20C7.59 20 4 16.41 4 12C4 7.59 7.59 4 12 4C16.41 4 20 7.59 20 12C20 16.41 16.41 20 12 20ZM12.5 7H11V13L16.2 16.2L17 14.9L12.5 12.2V7Z" fill="currentColor"/>
+                            </svg>
+                            Du lundi au vendredi
+                        </div>
+                        <div class="promo-price">
+                            <div class="new-price">8,50 €</div>
+                        </div>
+                        <a href="#" class="promo-button">En profiter</a>
+                    </div>
+                </div>
+                
+                <div class="promo-card">
+                    <div class="promo-image">
+                        <img src="/api/placeholder/400/200" alt="Happy Hour">
+                        <div class="promo-badge">HAPPY HOUR</div>
+                    </div>
+                    <div class="promo-content">
+                        <h2>Happy Hour</h2>
+                        <p>Tous les jours de 15h à 17h, le deuxième burger est à moitié prix ! Une offre imbattable pour les gourmands.</p>
+                        <div class="promo-duration">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12 2C6.5 2 2 6.5 2 12C2 17.5 6.5 22 12 22C17.5 22 22 17.5 22 12C22 6.5 17.5 2 12 2ZM12 20C7.59 20 4 16.41 4 12C4 7.59 7.59 4 12 4C16.41 4 20 7.59 20 12C20 16.41 16.41 20 12 20ZM12.5 7H11V13L16.2 16.2L17 14.9L12.5 12.2V7Z" fill="currentColor"/>
+                            </svg>
+                            15h - 17h tous les jours
+                        </div>
+                        <div class="promo-price">
+                            <div class="new-price">2ème à -50%</div>
+                        </div>
+                        <a href="#" class="promo-button">En profiter</a>
+                    </div>
+                </div>
+                
+                <div class="promo-card">
+                    <div class="promo-image">
+                        <img src="/api/placeholder/400/200" alt="Lunch Deal">
+                        <div class="promo-badge">MIDI</div>
+                    </div>
+                    <div class="promo-content">
+                        <h2>Lunch Deal</h2>
+                        <p>Du lundi au vendredi, de 11h30 à 14h, profitez d'un menu complet avec burger, frites, boisson et dessert à prix réduit.</p>
+                        <div class="promo-duration">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12 2C6.5 2 2 6.5 2 12C2 17.5 6.5 22 12 22C17.5 22 22 17.5 22 12C22 6.5 17.5 2 12 2ZM12 20C7.59 20 4 16.41 4 12C4 7.59 7.59 4 12 4C16.41 4 20 7.59 20 12C20 16.41 16.41 20 12 20ZM12.5 7H11V13L16.2 16.2L17 14.9L12.5 12.2V7Z" fill="currentColor"/>
+                            </svg>
+                            Lun-Ven, 11h30-14h
+                        </div>
+                        <div class="promo-price">
+                            <div class="old-price">15,90 €</div>
+                            <div class="new-price">11,90 €</div>
+                        </div>
+                        <a href="#" class="promo-button">En profiter</a>
+                    </div>
+                </div>
+                
+                <div class="promo-card">
+                    <div class="promo-image">
+                        <img src="/api/placeholder/400/200" alt="Menu Enfant">
+                        <div class="promo-badge">KIDS</div>
+                    </div>
+                    <div class="promo-content">
+                        <h2>Menu Enfant</h2>
+                        <p>Un petit burger, des frites, une boisson et une surprise pour les enfants jusqu'à 12 ans. Idéal pour les plus jeunes !</p>
+                        <div class="promo-duration">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12 2C6.5 2 2 6.5 2 12C2 17.5 6.5 22 12 22C17.5 22 22 17.5 22 12C22 6.5 17.5 2 12 2ZM12 20C7.59 20 4 16.41 4 12C4 7.59 7.59 4 12 4C16.41 4 20 7.59 20 12C20 16.41 16.41 20 12 20ZM12.5 7H11V13L16.2 16.2L17 14.9L12.5 12.2V7Z" fill="currentColor"/>
+                            </svg>
+                            Tous les jours
+                        </div>
+                        <div class="promo-price">
+                            <div class="new-price">6,90 €</div>
+                        </div>
+                        <a href="#" class="promo-button">En profiter</a>
+                    </div>
+                </div>
+                
+                <div class="promo-card">
+                    <div class="promo-image">
+                        <img src="/api/placeholder/400/200" alt="Offre d'anniversaire">
+                        <div class="promo-badge">BIRTHDAY</div>
+                    </div>
+                    <div class="promo-content">
+                        <h2>Offre d'anniversaire</h2>
+                        <p>Le jour de votre anniversaire, votre burger préféré est offert ! Présentez simplement une pièce d'identité pour en bénéficier.</p>
+                        <div class="promo-duration">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12 2C6.5 2 2 6.5 2 12C2 17.5 6.5 22 12 22C17.5 22 22 17.5 22 12C22 6.5 17.5 2 12 2ZM12 20C7.59 20 4 16.41 4 12C4 7.59 7.59 4 12 4C16.41 4 20 7.59 20 12C20 16.41 16.41 20 12 20ZM12.5 7H11V13L16.2 16.2L17 14.9L12.5 12.2V7Z" fill="currentColor"/>
+                            </svg>
+                            Le jour de votre anniversaire
+                        </div>
+                        <div class="promo-price">
+                            <div class="new-price">GRATUIT</div>
+                        </div>
+                        <a href="#" class="promo-button">En savoir plus</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section promo spéciale -->
+    <section class="special-promo">
+        <div class="container">
+            <h2>Offre Exclusive - Édition Limitée</h2>
+            <p>Découvrez notre nouveau burger gourmet "Le Suprême" avec steak de bœuf Angus, foie gras et truffe. Cette offre exceptionnelle est disponible pour une durée limitée !</p>
+            
+            <div class="countdown">
+                <div class="countdown-item">
+                    <div class="countdown-number">15</div>
+                    <div class="countdown-label">JOURS</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="countdown-number">08</div>
+                    <div class="countdown-label">HEURES</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="countdown-number">45</div>
+                    <div class="countdown-label">MINUTES</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="countdown-number">30</div>
+                    <div class="countdown-label">SECONDES</div>
+                </div>
+            </div>
+            
+            <a href="#" class="special-button">Découvrir l'offre</a>
+        </div>
+    </section>
+
+    <!-- Pied de page -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Burger Délice</h3>
+                    <p>Des hamburgers de qualité préparés avec passion pour satisfaire toutes vos envies gourmandes.</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Liens rapides</h3>
+                    <ul>
+                        <li><a href="index.html">Accueil</a></li>
+                        <li><a href="#">Promotions</a></li>
+                        <li><a href="temoignages.html">Témoignages</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Horaires</h3>
+                    <ul>
+                        <li>Lundi - Jeudi: 11h - 22h</li>
+                        <li>Vendredi - Samedi: 11h - 23h</li>
+                        <li>Dimanche: 12h - 22h</li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Suivez-nous</h3>
+                    <div class="social-links">
+                        <a href="#">FB</a>
+                        <a href="#">IG</a>
+                        <a href="#">TW</a>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                &copy; 2025 Burger Délice. Tous droits réservés.
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

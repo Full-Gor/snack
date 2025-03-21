@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - Burger Délice</title>
+    <style>
+        /* Styles généraux */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f8f8f8;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Styles de l'en-tête */
+        header {
+            background-color: #d62828;
+            color: white;
+            padding: 20px 0;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 32px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo span {
+            margin-left: 10px;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 30px;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: #ffdd00;
+        }
+        
+        /* Styles du titre de page */
+        .page-title {
+            background-color: #003049;
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+        }
+        
+        .page-title h1 {
+            font-size: 42px;
+            margin-bottom: 15px;
+        }
+        
+        .page-title p {
+            font-size: 18px;
+            max-width: 800px;
+            margin: 0 auto;
+            color: #eee;
+        }
+        
+        /* Styles de la section de contact */
+        .contact-section {
+            padding: 80px 0;
+        }
+        
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+        
+        /* Styles du formulaire */
+        .contact-form {
+            background-color: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .form-title {
+            margin-bottom: 30px;
+        }
+        
+        .form-title h2 {
+            font-size: 28px;
+            color: #d62828;
+            margin-bottom: 10px;
+        }
+        
+        .form-title p {
+            color: #666;
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            border-color: #fcbf49;
+            outline: none;
+        }
+        
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        .submit-button {
+            display: inline-block;
+            padding: 14px 30px;
+            background-color: #d62828;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .submit-button:hover {
+            background-color: #b51d1d;
+        }
+        
+        /* Styles des informations de contact */
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .info-card {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            margin-bottom: 30px;
+            transition: transform 0.3s;
+        }
+        
+        .info-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        
+        .info-card h3 {
+            font-size: 22px;
+            color: #003049;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .info-card h3 svg,
+        .info-card h3 span {
+            margin-right: 10px;
+        }
+        
+        .info-card p {
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+        
+        .info-card ul {
+            list-style: none;
+        }
+        
+        .info-card li {
+            margin-bottom: 8px;
+            color: #555;
+        }
+        
+        .info-card a {
+            color: #d62828;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .info-card a:hover {
+            color: #fcbf49;
+        }
+        
+        /* Styles de la carte */
+        .map-section {
+            padding: 50px 0 80px;
+        }
+        
+        .map-container {
+            height: 450px;
+            background-color: #eee;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+        
+        .map-title {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .map-title h2 {
+            font-size: 36px;
+            color: #d62828;
+            margin-bottom: 10px;
+        }
+        
+        .map-title p {
+            color: #666;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        /* Styles pour la section FAQ */
+        .faq-section {
+            padding: 80px 0;
+            background-color: #f4f4f4;
+        }
+        
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .faq-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .faq-title h2 {
+            font-size: 36px;
+            color: #d62828;
+            margin-bottom: 15px;
+        }
+        
+        .faq-title p {
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .faq-item {
+            background-color: white;
+            border-radius: 10px;
+            padding: 25px 30px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+            margin-bottom: 20px;
+        }
+        
+        .faq-question {
+            font-size: 20px;
+            font-weight: 600;
+            color: #003049;
+            margin-bottom: 15px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .faq-question span {
+            font-size: 24px;
+            font-weight: bold;
+            color: #fcbf49;
+        }
+        
+        .faq-answer {
+            color: #555;
+            line-height: 1.6;
+        }
+        
+        /* Styles du pied de page */
+        footer {
+            background-color: #333;
+            color: white;
+            padding: 50px 0 20px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-column h3 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            color: #fcbf49;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-column a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-column a:hover {
+            color: #fcbf49;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            transition: all 0.3s;
+        }
+        
+        .social-links a:hover {
+            background-color: #fcbf49;
+            color: #333;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 14px;
+            color: #aaa;
+        }
+        
+        /* Media queries pour la responsivité */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .page-title h1 {
+                font-size: 32px;
+            }
+            
+            .page-title p {
+                font-size: 16px;
+            }
+            
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .map-container {
+                height: 350px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- En-tête -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">
+                    🍔 <span>Burger Délice</span>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="promotions.html">Promotions</a></li>
+                    <li><a href="temoignages.html">Témoignages</a></li>
+                    <li><a href="#" class="active">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Titre de page -->
+    <div class="page-title">
+        <div class="container">
+            <h1>Contactez-nous</h1>
+            <p>Des questions, des suggestions ou une réservation ? N'hésitez pas à nous contacter !</p>
+        </div>
+    </div>
+
+    <!-- Section de contact -->
+    <section class="contact-section">
+        <div class="container">
+            <div class="contact-grid">
+                <!-- Formulaire de contact -->
+                <div class="contact-form">
+                    <div class="form-title">
+                        <h2>Envoyez-nous un message</h2>
+                        <p>Nous vous répondrons dans les plus brefs délais</p>
+                    </div>
+                    <form>
+                        <div class="form-group">
+                            <label for="name">Nom complet</label>
+                            <input type="text" id="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Téléphone</label>
+                            <input type="tel" id="phone">
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">Sujet</label>
+                            <select id="subject" required>
+                                <option value="">Sélectionnez un sujet</option>
+                                <option value="reservation">Réservation</option>
+                                <option value="info">Demande d'information</option>
+                                <option value="feedback">Commentaire ou suggestion</option>
+                                <option value="complaint">Réclamation</option>
+                                <option value="other">Autre</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" required></textarea>
+                        </div>
+                        <button type="submit" class="submit-button">Envoyer le message</button>
+                    </form>
+                </div>
+                
+                <!-- Informations de contact -->
+                <div class="contact-info">
+                    <div class="info-card">
+                        <h3>
+                            <span>📍</span> Adresse
+                        </h3>
+                        <p>15 Avenue des Gourmets<br>75011 Paris, France</p>
+                        <p><a href="#">Voir sur la carte</a></p>
+                    </div>
+                    
+                    <div class="info-card">
+                        <h3>
+                            <span>📞</span> Téléphone & Email
+                        </h3>
+                        <p>Tél : <a href="tel:+33123456789">01 23 45 67 89</a></p>
+                        <p>Email : <a href="mailto:contact@burgerdelice.fr">contact@burgerdelice.fr</a></p>
+                    </div>
+                    
+                    <div class="info-card">
+                        <h3>
+                            <span>🕒</span> Horaires d'ouverture
+                        </h3>
+                        <ul>
+                            <li><strong>Lundi - Jeudi :</strong> 11h - 22h</li>
+                            <li><strong>Vendredi - Samedi :</strong> 11h - 23h</li>
+                            <li><strong>Dimanche :</strong> 12h - 22h</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="info-card">
+                        <h3>
+                            <span>🔗</span> Suivez-nous
+                        </h3>
+                        <p>Restez connectés avec nous sur les réseaux sociaux pour ne rien manquer de nos offres et nouveautés !</p>
+                        <div class="social-links" style="margin-top: 15px;">
+                            <a href="#" style="background-color: #4267B2; color: white;">FB</a>
+                            <a href="#" style="background-color: #E1306C; color: white;">IG</a>
+                            <a href="#" style="background-color: #1DA1F2; color: white;">TW</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section de carte -->
+    <section class="map-section">
+        <div class="container">
+            <div class="map-title">
+                <h2>Nous trouver</h2>
+                <p>Venez nous rendre visite ! Nous sommes idéalement situés au cœur de Paris, facilement accessibles en transports en commun.</p>
+            </div>
+            <div class="map-container">
+                <!-- Placeholder pour la carte -->
+                <div style="background-color: #eee; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; color: #999; font-size: 20px;">
+                    [Carte interactive]
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section FAQ -->
+    <section class="faq-section">
+        <div class="container">
+            <div class="faq-title">
+                <h2>Questions fréquentes</h2>
+                <p>Retrouvez les réponses aux questions les plus fréquemment posées</p>
+            </div>
+            <div class="faq-container">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Proposez-vous un service de livraison ?
+                        <span>+</span>
+                    </div>
+                    <div class="faq-answer">
+                        Oui, nous proposons un service de livraison dans un rayon de 5 km autour de notre restaurant. Vous pouvez commander directement sur notre site web ou via les plateformes de livraison partenaires. La livraison est gratuite pour toute commande supérieure à 20€.
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Quelles sont les options végétariennes disponibles ?
+                        <span>+</span>
+                    </div>
+                    <div class="faq-answer">
+                        Nous proposons plusieurs options végétariennes, dont notre Veggie Burger à base de steak végétal, d'avocat et de légumes frais. Nous avons également des salades et des accompagnements végétariens. N'hésitez pas à nous demander des adaptations de nos recettes selon vos préférences alimentaires.
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Peut-on privatiser le restaurant pour un événement ?
+                        <span>+</span>
+                    </div>
+                    <div class="faq-answer">
+                        Oui, il est possible de privatiser notre établissement pour des événements privés ou professionnels (anniversaires, séminaires, etc.). Contactez-nous au moins deux semaines à l'avance pour vérifier les disponibilités et discuter des formules et tarifs. Nous pouvons accueillir jusqu'à 60 personnes.
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Proposez-vous des menus pour les enfants ?
+                        <span>+</span>
+                    </div>
+                    <div class="faq-answer">
+                        Bien sûr ! Notre menu enfant comprend un petit burger, une portion de frites, une boisson au choix et une surprise. Les portions sont adaptées aux enfants jusqu'à 12 ans. Nous proposons également des options sans allergènes pour les enfants ayant des restrictions alimentaires.
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        D'où proviennent vos ingrédients ?
+                        <span>+</span>
+                    </div>
+                    <div class="faq-answer">
+                        Nous privilégions les circuits courts et les producteurs locaux. Notre viande provient d'élevages français respectueux du bien-être animal, nos légumes sont majoritairement issus de l'agriculture locale et nos pains sont fabriqués par un boulanger artisanal du quartier. Nous travaillons avec des fournisseurs partageant nos valeurs de qualité et de respect de l'environnement.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pied de page -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Burger Délice</h3>
+                    <p>Des hamburgers de qualité préparés avec passion pour satisfaire toutes vos envies gourmandes.</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Liens rapides</h3>
+                    <ul>
+                        <li><a href="index.html">Accueil</a></li>
+                        <li><a href="promotions.html">Promotions</a></li>
+                        <li><a href="temoignages.html">Témoignages</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Horaires</h3>
+                    <ul>
+                        <li>Lundi - Jeudi: 11h - 22h</li>
+                        <li>Vendredi - Samedi: 11h - 23h</li>
+                        <li>Dimanche: 12h - 22h</li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Suivez-nous</h3>
+                    <div class="social-links">
+                        <a href="#">FB</a>
+                        <a href="#">IG</a>
+                        <a href="#">TW</a>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                &copy; 2025 Burger Délice. Tous droits réservés.
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
