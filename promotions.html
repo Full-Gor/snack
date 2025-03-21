@@ -365,33 +365,195 @@
                 font-size: 12px;
             }
         }
+         /* Styles des boutons de navigation animés */
+         .nav-links {
+                display: flex;
+                list-style: none;
+            }
+            
+            .nav-links li {
+                margin-left: 15px;
+            }
+            
+            .nav-button {
+                display: inline-block;
+                padding: 10px 15px;
+                background-color: rgba(255, 255, 255, 0.1);
+                color: white;
+                text-decoration: none;
+                font-weight: 500;
+                border-radius: 5px;
+                border: 2px solid transparent;
+                transition: all 0.3s ease;
+                position: relative;
+                overflow: hidden;
+            }
+            
+            .nav-button::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: -100%;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(255, 255, 255, 0.2);
+                transition: all 0.4s ease;
+                z-index: 1;
+            }
+            
+            .nav-button:hover::before {
+                left: 100%;
+            }
+            
+            .nav-button:hover {
+                background-color: #ffdd00;
+                color: #d62828;
+                border-color: #ffdd00;
+                transform: translateY(-3px);
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            }
+            
+            .nav-button.active {
+                background-color: #ffdd00;
+                color: #d62828;
+                border-color: #ffdd00;
+            }
+            
+         /* Animation des lettres dans les boutons */
+         .rotating-letter {
+                display: inline-block;
+                animation: rotateLetter 5s ease infinite;
+                transform-origin: center;
+            }
+            
+            @keyframes rotateLetter {
+                0%, 80%, 100% {
+                    transform: rotateY(0);
+                }
+                20% {
+                    transform: rotateY(360deg);
+                }
+            }
+            
+            /* Délai pour chaque lettre - bouton Accueil */
+            .nav-button:nth-child(1) .rotating-letter:nth-child(1) { animation-delay: 0.05s; }
+            .nav-button:nth-child(1) .rotating-letter:nth-child(2) { animation-delay: 0.10s; }
+            .nav-button:nth-child(1) .rotating-letter:nth-child(3) { animation-delay: 0.15s; }
+            .nav-button:nth-child(1) .rotating-letter:nth-child(4) { animation-delay: 0.20s; }
+            .nav-button:nth-child(1) .rotating-letter:nth-child(5) { animation-delay: 0.25s; }
+            .nav-button:nth-child(1) .rotating-letter:nth-child(6) { animation-delay: 0.30s; }
+            .nav-button:nth-child(1) .rotating-letter:nth-child(7) { animation-delay: 0.35s; }
+            
+            /* Styles du titre de page */
+            .page-title {
+                background-color: #003049;
+                color: white;
+                padding: 60px 0;
+                text-align: center;
+            }
+            
+            .page-title h1 {
+                font-size: 42px;
+                margin-bottom: 15px;
+            }
+            
+            .page-title p {
+                font-size: 18px;
+                max-width: 800px;
+                margin: 0 auto;
+                color: #eee;
+            }
+            
+            /* Media queries pour la responsivité */
+            @media (max-width: 768px) {
+                .nav-links {
+                    display: none;
+                }
+                
+                .page-title h1 {
+                    font-size: 32px;
+                }
+                
+                .page-title p {
+                    font-size: 16px;
+                }
+            }
     </style>
 </head>
 <body>
-    <!-- En-tête -->
-    <header>
-        <div class="container">
-            <nav>
-                <div class="logo">
-                    🍔 <span>Burger Délice</span>
-                </div>
-                <ul class="nav-links">
-                    <li><a href="index.html">Accueil</a></li>
-                    <li><a href="#" class="active">Promotions</a></li>
-                    <li><a href="temoignages.html">Témoignages</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
-
-    <!-- Titre de page -->
-    <div class="page-title">
-        <div class="container">
-            <h1>Nos Promotions Exceptionnelles</h1>
-            <p>Découvrez nos offres spéciales et économisez sur vos repas préférés</p>
-        </div>
+  <!-- En-tête -->
+  <header>
+    <div class="container">
+        <nav>
+            <div class="logo">
+                🍔 <span>Burger Délice</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="acceuil.html" class="nav-button">
+                    <span class="rotating-letter">A</span>
+                    <span class="rotating-letter">c</span>
+                    <span class="rotating-letter">c</span>
+                    <span class="rotating-letter">u</span>
+                    <span class="rotating-letter">e</span>
+                    <span class="rotating-letter">i</span>
+                    <span class="rotating-letter">l</span>
+                </a></li>
+                <li><a href="promotions.html" class="nav-button">
+                    <span class="rotating-letter">P</span>
+                    <span class="rotating-letter">r</span>
+                    <span class="rotating-letter">o</span>
+                    <span class="rotating-letter">m</span>
+                    <span class="rotating-letter">o</span>
+                    <span class="rotating-letter">t</span>
+                    <span class="rotating-letter">i</span>
+                    <span class="rotating-letter">o</span>
+                    <span class="rotating-letter">n</span>
+                    <span class="rotating-letter">s</span>
+                </a></li>
+                <li><a href="temoignages.html" class="nav-button">
+                    <span class="rotating-letter">T</span>
+                    <span class="rotating-letter">é</span>
+                    <span class="rotating-letter">m</span>
+                    <span class="rotating-letter">o</span>
+                    <span class="rotating-letter">i</span>
+                    <span class="rotating-letter">g</span>
+                    <span class="rotating-letter">n</span>
+                    <span class="rotating-letter">a</span>
+                    <span class="rotating-letter">g</span>
+                    <span class="rotating-letter">e</span>
+                    <span class="rotating-letter">s</span>
+                </a></li>
+                <li><a href="contact.html" class="nav-button">
+                    <span class="rotating-letter">C</span>
+                    <span class="rotating-letter">o</span>
+                    <span class="rotating-letter">n</span>
+                    <span class="rotating-letter">t</span>
+                    <span class="rotating-letter">a</span>
+                    <span class="rotating-letter">c</span>
+                    <span class="rotating-letter">t</span>
+                </a></li>
+                <li><a href="about.html" class="nav-button ">
+                    <span class="rotating-letter">À</span>
+                    <span class="rotating-letter"></span>
+                    <span class="rotating-letter">p</span>
+                    <span class="rotating-letter">r</span>
+                    <span class="rotating-letter">o</span>
+                    <span class="rotating-letter">p</span>
+                    <span class="rotating-letter">o</span>
+                    <span class="rotating-letter">s</span>
+                </a></li>
+            </ul>
+        </nav>
     </div>
+</header>
+
+<!-- Titre de page normal (sans animation) -->
+<div class="page-title">
+    <div class="container">
+        <h1>Notre Histoire</h1>
+        <p>Découvrez qui nous sommes et ce qui nous passionne : des burgers d'exception et un service attentionné</p>
+    </div>
+</div>
 
     <!-- Section des promotions -->
     <section class="promotions-section">
